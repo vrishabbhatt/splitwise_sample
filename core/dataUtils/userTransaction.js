@@ -12,12 +12,11 @@ const insertExpenseTransaction = (paidBy, paidTo, amount, expenseId) => {
 const fetchPaidTransactionsByUserId = async (userId) => {
     try{
         const paidTransactions = await userTransactionDbUtil.fetchPaidTransactionsByUserId(userId);
-        console.log('paidTransactions: ', paidTransactions);
         if(!paidTransactions.length) return {};
         paidTransactionsSummaryObj = {};
         paidTransactions.forEach((paidTransactionRow) => {
             const {paidTo, sum} = paidTransactionRow;
-            paidTransactionsSummaryObj[paidTo] = sum;
+            paidTransactionsSummaryObj[paidTo] = parseFloat(sum);
         });
         return paidTransactionsSummaryObj;
     }
@@ -29,12 +28,11 @@ const fetchPaidTransactionsByUserId = async (userId) => {
 const fetchBorrowedTransactionsByUserId = async (userId) => {
     try{
         const borrowedTransactions = await userTransactionDbUtil.fetchBorrowedTransactionsByUserId(userId);
-        console.log('borrowedTransactions: ', borrowedTransactions);
         if(!borrowedTransactions.length) return {};
         borrowedTransactionsSummaryObj = {};
         borrowedTransactionsSummaryObj.forEach((borrowedTransactionRow) => {
             const {paidBy, sum} = borrowedTransactionRow;
-            borrowedTransactionsSummaryObj[paidBy] = sum;
+            borrowedTransactionsSummaryObj[paidBy] = parseFloat(sum);
         });
         return borrowedTransactionsSummaryObj;
     }
