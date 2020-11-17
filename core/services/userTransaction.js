@@ -45,7 +45,7 @@ const fetchUserTransactions = async (userId) => {
         }
     }
     catch(err){
-
+        throw err;
     }
 }
 

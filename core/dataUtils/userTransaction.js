@@ -30,7 +30,7 @@ const fetchBorrowedTransactionsByUserId = async (userId) => {
         const borrowedTransactions = await userTransactionDbUtil.fetchBorrowedTransactionsByUserId(userId);
         if(!borrowedTransactions.length) return {};
         borrowedTransactionsSummaryObj = {};
-        borrowedTransactionsSummaryObj.forEach((borrowedTransactionRow) => {
+        borrowedTransactions.forEach((borrowedTransactionRow) => {
             const {paidBy, sum} = borrowedTransactionRow;
             borrowedTransactionsSummaryObj[paidBy] = parseFloat(sum);
         });
